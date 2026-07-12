@@ -1,0 +1,35 @@
+server:
+  port: ${SERVER_PORT:9003}
+
+spring:
+  application:
+    name: character-service
+  datasource:
+    # 抽取了数据库主机、端口、数据库名、用户名和密码
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/character_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:123456}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        # 抽取了 Nacos 地址
+        server-addr: ${NACOS_ADDR:localhost:8848}
+        username: ${NACOS_USERNAME:nacos}
+        password: ${NACOS_PASSWORD:nacos}
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: assign_id
+      logic-delete-field: isDeleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+file:
+  # 统一在路径前加了 / 以规范容器内绝对路径，提供 FILE_UPLOAD_FOLDER 变量兜底
+  upload-folder: ${FILE_UPLOAD_FOLDER:/app/uploads/characters/}
+  # 抽取图片访问的前缀域名/IP，默认兜底为 http://localhost:9003
+  access-prefix: ${FILE_ACCESS_HOST:http://localhost:9003}/uploads/characters/

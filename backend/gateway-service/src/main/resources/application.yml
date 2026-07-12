@@ -1,0 +1,74 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_ADDR:localhost:8848}
+    gateway:
+      server:
+        webflux:
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowedOrigins: "*"
+                allowedMethods: "*"
+                allowedHeaders: "*"
+          routes:
+            - id: auth-service
+              uri: lb://auth-service
+              predicates:
+                - Path=/api/auth/**,/api/users/**,/api/admin/**
+            - id: work-service
+              uri: lb://work-service
+              predicates:
+                - Path=/api/works/**,/api/categories/**,/api/work-categories/**,/work/file/**,/uploads/works/**
+            - id: character-service
+              uri: lb://character-service
+              predicates:
+                - Path=/api/characters/**,/api/character-relations/**,/api/work-character-actors/**,/character/file/**,/uploads/characters/**
+            - id: person-service
+              uri: lb://person-service
+              predicates:
+                - Path=/api/persons/**,/api/person-works/**,/person/file/**,/uploads/persons/**
+            - id: rating-service
+              uri: lb://rating-service
+              predicates:
+                - Path=/api/ratings/**,/api/votes/**
+            - id: comment-service
+              uri: lb://comment-service
+              predicates:
+                - Path=/api/comments/**
+            - id: favorite-service
+              uri: lb://favorite-service
+              predicates:
+                - Path=/api/favorites/**
+            - id: notification-service
+              uri: lb://notification-service
+              predicates:
+                - Path=/api/notifications/**,/api/announcements/**
+            - id: notification-websocket
+              uri: lb:ws://notification-service
+              predicates:
+                - Path=/ws/notifications,/ws/notifications/**
+            - id: chat-service
+              uri: lb://chat-service
+              predicates:
+                - Path=/api/chats/**,/ws/**
+            - id: chat-websocket
+              uri: lb:ws://chat-service
+              predicates:
+                - Path=/ws/chats,/ws/chats/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway
+
+anime:
+  jwt:
+    secret: anime-platform-auth-secret-2026

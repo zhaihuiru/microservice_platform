@@ -1,0 +1,12 @@
+USE work_db;
+SET FOREIGN_KEY_CHECKS=0;
+TRUNCATE categories;
+TRUNCATE works;
+TRUNCATE work_category;
+TRUNCATE characters;
+TRUNCATE character_relation;
+TRUNCATE work_character_actor;
+USE person_db;
+TRUNCATE persons;
+TRUNCATE person_work;
+SET FOREIGN_KEY_CHECKS=1;

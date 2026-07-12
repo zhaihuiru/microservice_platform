@@ -1,0 +1,119 @@
+version: "3.8"
+
+# 使用前先在 backend 目录执行：mvn clean package -DskipTests
+# 再执行：docker compose -f docker-compose.yml -f docker-compose-app.yml up -d --build
+
+x-service-env: &service-env
+  NACOS_ADDR: anime-nacos:8848
+  SPRING_CLOUD_NACOS_DISCOVERY_USERNAME: nacos
+  SPRING_CLOUD_NACOS_DISCOVERY_PASSWORD: "123456"
+  MYSQL_HOST: anime-mysql
+  MYSQL_PORT: 3306
+  MYSQL_USERNAME: root
+  MYSQL_PASSWORD: 123456
+
+services:
+  gateway-service:
+    build:
+      context: ../backend
+      dockerfile: gateway-service/Dockerfile
+    environment:
+      NACOS_ADDR: anime-nacos:8848
+      SPRING_CLOUD_NACOS_DISCOVERY_USERNAME: nacos
+      SPRING_CLOUD_NACOS_DISCOVERY_PASSWORD: "123456"
+    ports:
+      - "8080:8080"
+
+  auth-service:
+    build:
+      context: ../backend
+      dockerfile: auth-service/Dockerfile
+    environment: *service-env
+    ports:
+      - "9001:9001"
+
+  work-service:
+    build:
+      context: ../backend
+      dockerfile: work-service/Dockerfile
+    environment: *service-env
+    ports:
+      - "9002:9002"
+    volumes:
+      - ../backend/uploads/works:/app/uploads/works
+
+  character-service:
+    build:
+      context: ../backend
+      dockerfile: character-service/Dockerfile
+    environment: *service-env
+    ports:
+      - "9003:9003"
+    volumes:
+      - ../backend/uploads/characters:/app/uploads/characters
+
+  person-service:
+    build:
+      context: ../backend
+      dockerfile: person-service/Dockerfile
+    environment: *service-env
+    ports:
+      - "9004:9004"
+    volumes:
+      - ../backend/uploads/persons:/app/uploads/persons
+
+  rating-service:
+    build:
+      context: ../backend
+      dockerfile: rating-service/Dockerfile
+    environment: *service-env
+    ports:
+      - "9005:9005"
+
+  comment-service:
+    build:
+      context: ../backend
+      dockerfile: comment-service/Dockerfile
+    environment: *service-env
+    ports:
+      - "9006:9006"
+
+  favorite-service:
+    build:
+      context: ../backend
+      dockerfile: favorite-service/Dockerfile
+    environment: *service-env
+    ports:
+      - "9007:9007"
+
+  notification-service:
+    build:
+      context: ../backend
+      dockerfile: notification-service/Dockerfile
+    environment: *service-env
+    ports:
+      - "9008:9008"
+
+  chat-service:
+    build:
+      context: ../backend
+      dockerfile: chat-service/Dockerfile
+    environment: *service-env
+    ports:
+      - "9009:9009"
+
+  frontend:
+    profiles:
+      - frontend
+
+    build:
+      context: ../frontend/anime-platform-web
+      dockerfile: Dockerfile
+
+    container_name: anime-frontend
+
+    ports:
+      - "5173:80"
+
+    depends_on:
+      - gateway-service
