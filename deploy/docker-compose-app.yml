@@ -1,5 +1,3 @@
-version: "3.8"
-
 # 使用前先在 backend 目录执行：mvn clean package -DskipTests
 # 再执行：docker compose -f docker-compose.yml -f docker-compose-app.yml up -d --build
 

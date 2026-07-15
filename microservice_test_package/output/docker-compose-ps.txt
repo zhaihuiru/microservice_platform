@@ -1,0 +1,14 @@
+﻿NAME                            IMAGE                         COMMAND                   SERVICE                CREATED       STATUS          PORTS
+anime-mysql                     mysql:8.0                     "docker-entrypoint.s鈥?   mysql                  2 days ago    Up 14 minutes   0.0.0.0:3306->3306/tcp, [::]:3306->3306/tcp
+anime-nacos                     nacos/nacos-server:v3.1.1     "sh bin/docker-start鈥?   nacos                  2 days ago    Up 14 minutes   0.0.0.0:8848->8848/tcp, [::]:8848->8848/tcp, 0.0.0.0:9848->9848/tcp, [::]:9848->9848/tcp, 0.0.0.0:8081->8080/tcp, [::]:8081->8080/tcp
+anime-redis                     redis:7                       "docker-entrypoint.s鈥?   redis                  2 days ago    Up 14 minutes   0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp
+deploy-auth-service-1           deploy-auth-service           "java -jar app.jar"       auth-service           9 hours ago   Up 6 minutes    0.0.0.0:9001->9001/tcp, [::]:9001->9001/tcp
+deploy-character-service-1      deploy-character-service      "java -jar app.jar"       character-service      9 hours ago   Up 14 minutes   0.0.0.0:9003->9003/tcp, [::]:9003->9003/tcp
+deploy-chat-service-1           deploy-chat-service           "java -jar app.jar"       chat-service           9 hours ago   Up 14 minutes   0.0.0.0:9009->9009/tcp, [::]:9009->9009/tcp
+deploy-comment-service-1        deploy-comment-service        "java -jar app.jar"       comment-service        9 hours ago   Up 14 minutes   0.0.0.0:9006->9006/tcp, [::]:9006->9006/tcp
+deploy-favorite-service-1       deploy-favorite-service       "java -jar app.jar"       favorite-service       9 hours ago   Up 14 minutes   0.0.0.0:9007->9007/tcp, [::]:9007->9007/tcp
+deploy-gateway-service-1        deploy-gateway-service        "java -jar app.jar"       gateway-service        8 hours ago   Up 14 minutes   0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+deploy-notification-service-1   deploy-notification-service   "java -jar app.jar"       notification-service   9 hours ago   Up 5 minutes    0.0.0.0:9008->9008/tcp, [::]:9008->9008/tcp
+deploy-person-service-1         deploy-person-service         "java -jar app.jar"       person-service         9 hours ago   Up 14 minutes   0.0.0.0:9004->9004/tcp, [::]:9004->9004/tcp
+deploy-rating-service-1         deploy-rating-service         "java -jar app.jar"       rating-service         9 hours ago   Up 13 minutes   0.0.0.0:9005->9005/tcp, [::]:9005->9005/tcp
+deploy-work-service-1           deploy-work-service           "java -jar app.jar"       work-service           9 hours ago   Up 6 minutes    0.0.0.0:9002->9002/tcp, [::]:9002->9002/tcp

@@ -5,6 +5,7 @@ import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -27,7 +28,13 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         String path = exchange.getRequest().getPath().pathWithinApplication().value();
 
         // 公开接口直接放行
-        if (isPublicPath(path)) {
+//        if (isPublicPath(path)) {
+//            return chain.filter(exchange);
+//        }
+
+        HttpMethod method = exchange.getRequest().getMethod();
+
+        if (isPublicPath(path, method)) {
             return chain.filter(exchange);
         }
 
@@ -103,7 +110,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
      * 3. 作品、角色、人物浏览
      * 4. actuator 健康检查
      */
-    private boolean isPublicPath(String path) {
+    private boolean isPublicPath(String path, HttpMethod method)  {
         if (path == null) {
             return false;
         }
@@ -120,15 +127,35 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         }
 
         // 公开浏览类接口
-        if (path.equals("/api/works") || path.startsWith("/api/works/")) {
+//        if (path.equals("/api/works") || path.startsWith("/api/works/")) {
+//            return true;
+//        }
+//
+//        if (path.equals("/api/characters") || path.startsWith("/api/characters/")) {
+//            return true;
+//        }
+//
+//        if (path.equals("/api/persons") || path.startsWith("/api/persons/")) {
+//            return true;
+//        }
+
+        boolean isGetRequest = HttpMethod.GET.equals(method);
+
+        if (isGetRequest
+                && (path.equals("/api/works")
+                || path.startsWith("/api/works/"))) {
             return true;
         }
 
-        if (path.equals("/api/characters") || path.startsWith("/api/characters/")) {
+        if (isGetRequest
+                && (path.equals("/api/characters")
+                || path.startsWith("/api/characters/"))) {
             return true;
         }
 
-        if (path.equals("/api/persons") || path.startsWith("/api/persons/")) {
+        if (isGetRequest
+                && (path.equals("/api/persons")
+                || path.startsWith("/api/persons/"))) {
             return true;
         }
 

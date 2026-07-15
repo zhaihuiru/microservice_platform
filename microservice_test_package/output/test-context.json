@@ -1,0 +1,11 @@
+﻿{
+    "baseUrl":  "http://localhost:8080",
+    "adminToken":  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlcyI6IkFETUlOLFVTRVIiLCJleHAiOjE3ODQxNjM4MDgwNDd9.FwVqOsBaj-LaFJLoFrPFmvFP_vRgWfQ8IITWTrjlY_w",
+    "user1Token":  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJ1c2VybmFtZSI6InJlcG9ydF91MV8wNzE1MDkwMzI3Iiwicm9sZXMiOiJVU0VSIiwiZXhwIjoxNzg0MTYzODA4ODEwfQ.nQ-urxyG0RKM3i-4HhsrBIBa85_ILfT1piWqs1KLCKQ",
+    "user2Token":  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJ1c2VybmFtZSI6InJlcG9ydF91Ml8wNzE1MDkwMzI3Iiwicm9sZXMiOiJVU0VSIiwiZXhwIjoxNzg0MTYzODA4OTU4fQ.w4YYT_pcdfL7ZCQ48TFp6wnvzsZRGcHDCp9z58E8xnw",
+    "user1Id":  11,
+    "user2Id":  12,
+    "folderId":  3,
+    "conversationId":  3,
+    "suffix":  "0715090327"
+}
